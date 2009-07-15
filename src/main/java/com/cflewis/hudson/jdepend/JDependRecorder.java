@@ -244,16 +244,6 @@ public class JDependRecorder extends Recorder
         return new JDependProjectAction(project);
     }
 
-    public BuildStepDescriptor<Publisher> getDescriptor() {
-        // see Descriptor javadoc for more about what a descriptor is.
-        return DESCRIPTOR;
-    }
-
-    /**
-     * Descriptor should be singleton.
-     */
-    public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
-
     /**
      * Descriptor for {@link JDependRecorder}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
