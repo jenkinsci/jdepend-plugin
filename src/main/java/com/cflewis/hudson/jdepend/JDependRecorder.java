@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Extension;
 import hudson.util.FormFieldValidator;
+import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
@@ -57,11 +58,6 @@ public class JDependRecorder extends Recorder
     {
     }
 
-    public boolean needsToRunAfterFinalized()
-    {
-    	return true;
-    }
-    
     protected void log(final String message)
     {
     	logger.println("[JDepend] " + message);
@@ -114,7 +110,7 @@ public class JDependRecorder extends Recorder
      * @param listener
      * @return True if report generated successfully.
      */
-    protected boolean generateJDependReport(Build<?, ?> build, Launcher launcher, 
+    protected boolean generateJDependReport(AbstractBuild<?, ?> build, Launcher launcher, 
     		BuildListener listener)
     {
     	logger = listener.getLogger();
@@ -216,7 +212,7 @@ public class JDependRecorder extends Recorder
      * <b>Warning:</b> Usage on multiple machines, and the copying of data
      * thereof, has not been adequately tested yet.
      */
-    public boolean perform(Build build, Launcher launcher, BuildListener listener) 
+    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) 
     {
     	return generateJDependReport(build, launcher, listener);
     }

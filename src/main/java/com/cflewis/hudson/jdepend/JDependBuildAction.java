@@ -20,7 +20,7 @@ public class JDependBuildAction implements Action
 	private final JDependParser jDependParser;
 	private String htmlReport;
 	
-	public JDependBuildAction(Build<?, ?> build, JDependParser jDependParser)
+	public JDependBuildAction(AbstractBuild<?, ?> build, JDependParser jDependParser)
 	{
 		super();
 		this.build = build;

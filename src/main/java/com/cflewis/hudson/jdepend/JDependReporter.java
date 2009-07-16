@@ -81,8 +81,14 @@ public class JDependReporter extends JDependMojo
         	e.printStackTrace();
             throw new MavenReportException("Failed to generate JDepend report:" + e.getMessage(), e);
         }
-                
-        return tidyHtmlStream(htmlStream);
+          
+        /**
+         * Running a tidy can create server problems as it can generate
+         * tens of thousands of lines. Disabled for now.
+         */
+        //return tidyHtmlStream(htmlStream);
+        
+        return htmlStream.toString();
 	}
 	
     protected ResourceBundle getBundle()
