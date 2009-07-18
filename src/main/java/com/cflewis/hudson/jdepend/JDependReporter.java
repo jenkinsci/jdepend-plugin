@@ -28,19 +28,16 @@ public class JDependReporter extends JDependMojo
 {
 	protected JDependParser xmlParser;
 	
-	public JDependReporter(JDependParser xmlParser)
-	{
+	public JDependReporter(JDependParser xmlParser) {
 		super();
 		this.xmlParser = xmlParser;
 	}
 	
-	public void generateReport(Locale locale) throws MavenReportException
-	{
+	public void generateReport(Locale locale) throws MavenReportException {
 		throw new MavenReportException("Use getReport() instead!");
 	}
 	
-	protected String tidyHtmlStream(ByteArrayOutputStream htmlStream)
-	{
+	protected String tidyHtmlStream(ByteArrayOutputStream htmlStream) {
         Tidy tidy = new Tidy();
         ByteArrayOutputStream tidyStream = new ByteArrayOutputStream();
         tidy.setXHTML(true);
@@ -50,13 +47,11 @@ public class JDependReporter extends JDependMojo
         return tidyStream.toString();
 	}
 	
-	public String getReport() throws MavenReportException
-	{
+	public String getReport() throws MavenReportException {
 		return getReport(Locale.ENGLISH);
 	}
 	
-	public String getReport(Locale locale) throws MavenReportException
-	{
+	public String getReport(Locale locale) throws MavenReportException {
 		XhtmlSinkFactory sinkFactory = new XhtmlSinkFactory();
         Sink sink;
         JDependReportGenerator report = new JDependReportGenerator();
@@ -91,8 +86,7 @@ public class JDependReporter extends JDependMojo
         return htmlStream.toString();
 	}
 	
-    protected ResourceBundle getBundle()
-    {
+    protected ResourceBundle getBundle() {
         return ResourceBundle.getBundle("org.codehaus.mojo.jdepend.jdepend-report");
     }
 }

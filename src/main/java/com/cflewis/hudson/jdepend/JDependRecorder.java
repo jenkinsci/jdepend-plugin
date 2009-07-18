@@ -54,12 +54,10 @@ public class JDependRecorder extends Recorder
     private PrintStream logger = System.out;
 
     @DataBoundConstructor
-    public JDependRecorder() 
-    {
+    public JDependRecorder() {
     }
 
-    protected void log(final String message)
-    {
+    protected void log(final String message) {
     	logger.println("[JDepend] " + message);
     }
     
@@ -70,8 +68,7 @@ public class JDependRecorder extends Recorder
      * @author Chris Lewis
      */
     private FilePath copyToLocalWorkspace(FilePath currentWorkspace) throws
-    	InterruptedException, IOException
-    {
+    	InterruptedException, IOException {
     	FilePath newSourceLocation = (new FilePath(new File(System.getProperty("java.io.tmpdir"))).createTempDir("hudson-jdepend", ""));
     	log("Copying remote data to " + newSourceLocation.toURI());
     	currentWorkspace.copyRecursiveTo(newSourceLocation);
@@ -91,9 +88,9 @@ public class JDependRecorder extends Recorder
      * @throws ParserConfigurationException
      * @throws SAXException
      */
-    protected JDependParser getJDependParser(File jDependOutputFile, String sourcePath)
-    	throws IOException, ParserConfigurationException, SAXException
-    {
+    protected JDependParser getJDependParser(File jDependOutputFile, 
+    		String sourcePath)
+    	throws IOException, ParserConfigurationException, SAXException {
     	log("Starting JDepend file, outputting to " + jDependOutputFile.getAbsolutePath());
     	JDepend.main(getArgumentList("-file", jDependOutputFile.getAbsolutePath(), sourcePath)); //build.getProject().getWorkspace().getName()));
     	JDependParser xmlParser = new JDependParser(jDependOutputFile);
@@ -110,9 +107,8 @@ public class JDependRecorder extends Recorder
      * @param listener
      * @return True if report generated successfully.
      */
-    protected boolean generateJDependReport(AbstractBuild<?, ?> build, Launcher launcher, 
-    		BuildListener listener)
-    {
+    protected boolean generateJDependReport(AbstractBuild<?, ?> build, 
+    		Launcher launcher, BuildListener listener) {
     	logger = listener.getLogger();
     	File jDependFile = null;
     	String sourcePath = ".";
@@ -125,18 +121,15 @@ public class JDependRecorder extends Recorder
     	 * Ready files by ensuring they're on the local machine, fail out
     	 * if we can't get the files locally.
     	 */
-        try
-        {
-        	if (sourceLocation.isRemote())
-        	{
+        try {
+        	if (sourceLocation.isRemote()) {
         		sourceLocation = copyToLocalWorkspace(sourceLocation);
         		copiedWorkspace = true;
         	}
         	
         	jDependFile = File.createTempFile("jdepend", ".xml");
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
         	log("Unable to ready files: " + e);
         	return false;
         }
@@ -145,24 +138,20 @@ public class JDependRecorder extends Recorder
          * Make sure we actually have paths to where we want to go. Without
          * paths, we have to fail out.
          */
-        try
-        {
+        try {
         	sourcePath = sourceLocation.toURI().getPath();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
         	log("Unable to get workspace path: " + e);
         	return false;
         }
         
     	JDependParser p = null;
         	
-        try
-        {
+        try {
         	p = getJDependParser(jDependFile, sourcePath);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
         	log("Couldn't generate JDepend file " + e);
         }
         
@@ -173,10 +162,8 @@ public class JDependRecorder extends Recorder
          * is not the actual workspace, then it's a temporary directory which 
          * can be safely deleted.
          */
-        if (copiedWorkspace) 
-        {
-        	try
-        	{
+        if (copiedWorkspace) {
+        	try {
         		log("Temporary directory deletion disabled, " +
         				"due to lack of testing. " +
         				"Your OS should clean the directory later. " +
@@ -184,15 +171,13 @@ public class JDependRecorder extends Recorder
         		//log("Deleting temporary directory " + sourceLocation);
         		//sourceLocation.deleteRecursive();
         	}
-        	catch (Exception e)
-        	{
+        	catch (Exception e) {
         		log("Unable to remove copied temp source directory at " + 
         				sourcePath + ": " + e);
         	}
         }
         
-        if (!jDependFile.delete())
-        {
+        if (!jDependFile.delete()) {
         	log("Unable to remove temp JDepend file in " + 
         			jDependFile.getPath());
         }
@@ -212,8 +197,8 @@ public class JDependRecorder extends Recorder
      * <b>Warning:</b> Usage on multiple machines, and the copying of data
      * thereof, has not been adequately tested yet.
      */
-    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) 
-    {
+    public boolean perform(AbstractBuild<?,?> build, Launcher launcher, 
+    		BuildListener listener) {
     	return generateJDependReport(build, launcher, listener);
     }
     
@@ -225,8 +210,8 @@ public class JDependRecorder extends Recorder
      * @param classDir   Accepts the location of the classes.
      * @return String[]  Returns the array to be pass as parameters for JDepend.
      */
-    private String[] getArgumentList(String argument, String reportFile, String classDir)
-    {
+    private String[] getArgumentList(String argument, String reportFile, 
+    		String classDir) {
         ArrayList<String> argList = new ArrayList<String>();
         argList.add(argument);
         argList.add(reportFile);
@@ -235,8 +220,7 @@ public class JDependRecorder extends Recorder
         return (String[]) argList.toArray(new String[argList.size()]);
     }
     
-    public Action getProjectAction(AbstractProject<?, ?> project) 
-    {
+    public Action getProjectAction(AbstractProject<?, ?> project) {
         return new JDependProjectAction(project);
     }
 
@@ -258,19 +242,15 @@ public class JDependRecorder extends Recorder
          * <p>
          * If you don't want fields to be persisted, use <tt>transient</tt>.
          */
-        public DescriptorImpl() 
-        {
+        public DescriptorImpl() {
             super(JDependRecorder.class);
         }
         
         @SuppressWarnings("unchecked")
         @Override
-        public boolean isApplicable(Class<? extends AbstractProject> jobType)
-        {
+        public boolean isApplicable(Class<? extends AbstractProject> jobType) {
         	return true;
         }
-        
-        
 
         /**
          * This human readable name is used in the configuration screen.
@@ -279,8 +259,7 @@ public class JDependRecorder extends Recorder
             return "Report JDepend";
         }
 
-        public boolean configure(StaplerRequest req, JSONObject o) throws FormException 
-        {
+        public boolean configure(StaplerRequest req, JSONObject o) throws FormException {
         	return true;
         }
     }

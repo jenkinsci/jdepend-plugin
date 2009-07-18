@@ -27,12 +27,10 @@ public class JDependBuildAction implements Action
 		this.jDependParser = jDependParser;
     	JDependReporter r = new JDependReporter(jDependParser);
     	
-    	try
-    	{
+    	try {
     		htmlReport = r.getReport();
     	}
-    	catch (Exception e)
-    	{
+    	catch (Exception e) {
     		htmlReport = "Report generation failed: " + e;
     	}
 	}
@@ -40,8 +38,7 @@ public class JDependBuildAction implements Action
 	/* (non-Javadoc)
 	 * @see hudson.model.Action#getDisplayName()
 	 */
-	public String getDisplayName() 
-	{
+	public String getDisplayName() {
 		// TODO Auto-generated method stub
 		return "JDepend";
 	}
@@ -49,8 +46,7 @@ public class JDependBuildAction implements Action
 	/* (non-Javadoc)
 	 * @see hudson.model.Action#getIconFileName()
 	 */
-	public String getIconFileName() 
-	{
+	public String getIconFileName() {
 		// TODO Auto-generated method stub
 		return "graph.gif";
 	}
@@ -58,14 +54,12 @@ public class JDependBuildAction implements Action
 	/* (non-Javadoc)
 	 * @see hudson.model.Action#getUrlName()
 	 */
-	public String getUrlName() 
-	{
+	public String getUrlName() {
 		// TODO Auto-generated method stub
 		return "jdepend";
 	}
 
-	public String getJDependHtml()
-	{
+	public String getJDependHtml() {
 		Pattern trimTop = Pattern.compile("^.*<body>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		Pattern trimBottom = Pattern.compile("</body>.*</html>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		

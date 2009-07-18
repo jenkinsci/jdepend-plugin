@@ -27,8 +27,7 @@ public class JDependParser extends JDependXMLReportParser {
 	 * @throws IOException
 	 */
 	public JDependParser(File xmlFile) throws ParserConfigurationException,
-			SAXException, IOException 
-	{
+			SAXException, IOException {
 		super(xmlFile);
 	}
 	
@@ -44,18 +43,15 @@ public class JDependParser extends JDependXMLReportParser {
     {
     	int totalClasses = 0;
     	
-    	for (Iterator<?> it = packages.iterator(); it.hasNext();)
-    	{
+    	for (Iterator<?> it = packages.iterator(); it.hasNext();) {
     		JDPackage jdp = (JDPackage)it.next();
     		totalClasses = totalClasses + Integer.parseInt(jdp.getStats().getTotalClasses());
-
     	}
     	
     	return Integer.toString(totalClasses);
     }
 
-	public List getCycles()
-	{
+	public List getCycles() {
 		return cycles;
 	}
 }

@@ -15,31 +15,26 @@ public final class JDependProjectAction implements Action
 {
 	public final AbstractProject<?,?> project;
 	
-	public JDependProjectAction(AbstractProject<?, ?> project)
-	{
+	public JDependProjectAction(AbstractProject<?, ?> project) {
 		this.project = project;
 	}
 	
-	public String getIconFileName()
-	{
+	public String getIconFileName() {
 		return null;
 		//return "graph.gif";
 	}
 	
-	public String getDisplayName()
-	{
+	public String getDisplayName() {
 		return null;
 		//return "JDepend";
 	}
 	
-	public String getUrlName()
-	{
+	public String getUrlName() {
 		return null;
 		//return "jdepend";
 	}
 	
-	public String getJDependHtml()
-	{
+	public String getJDependHtml() {
 		return "This is the JDepend HTML, which may eventually show trends.";
 	}
 }
