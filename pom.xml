@@ -7,7 +7,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   
-  <groupId>com.cflewis.hudson.jdepend</groupId>
+  <groupId>hudson.plugins.jdepend</groupId>
   <artifactId>jdepend</artifactId>
   <packaging>hpi</packaging>
   <version>1.1-SNAPSHOT</version>
