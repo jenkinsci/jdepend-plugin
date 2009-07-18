@@ -28,6 +28,10 @@ public class JDependReporter extends JDependMojo
 {
 	protected JDependParser xmlParser;
 	
+	/**
+	 * Create a new report from the parsed JDepend report
+	 * @param xmlParser A parsed JDepend report
+	 */
 	public JDependReporter(JDependParser xmlParser) {
 		super();
 		this.xmlParser = xmlParser;

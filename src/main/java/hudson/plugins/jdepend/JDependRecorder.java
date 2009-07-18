@@ -42,9 +42,8 @@ import org.codehaus.mojo.jdepend.*;
 import org.codehaus.mojo.jdepend.objects.*;
 
 /**
- * JDependRecorder
- * 
- * Processes JDepend metrics after a build.
+ * Processes JDepend metrics after a build, and outputs them to the
+ * a page for the build
  *
  * @author Chris Lewis
  */
@@ -57,6 +56,10 @@ public class JDependRecorder extends Recorder
     public JDependRecorder() {
     }
 
+    /**
+     * Log output to the given logger, using the JDepend identifier
+     * @param message The message to be outputted
+     */
     protected void log(final String message) {
     	logger.println("[JDepend] " + message);
     }

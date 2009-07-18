@@ -6,13 +6,9 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.Publisher;
 
 /**
- * Entry point of a plugin.
- *
- * <p>
- * There must be one {@link Plugin} class in each plugin.
- * See javadoc of {@link Plugin} for more about what can be done on this class.
- *
- * @author Kohsuke Kawaguchi
+ * Entry point of the JDepend plugin
+ * 
+ * @author Chris Lewis
  */
 
 @Extension
