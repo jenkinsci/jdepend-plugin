@@ -1,9 +1,0 @@
-*.class
-.DS_Store
-.git
-.settings
-.project
-.classpath
-test/*
-target/*
-work/*
