@@ -8,7 +8,7 @@
   </parent>
   
   <groupId>com.cflewis.hudson.jdepend</groupId>
-  <artifactId>hudson-jdepend-plugin</artifactId>
+  <artifactId>jdepend</artifactId>
   <packaging>hpi</packaging>
   <version>1.0-SNAPSHOT</version>
   
