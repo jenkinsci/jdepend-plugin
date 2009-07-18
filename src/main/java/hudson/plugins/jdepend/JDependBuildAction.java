@@ -1,16 +1,16 @@
 /**
  * 
  */
-package com.cflewis.hudson.jdepend;
+package hudson.plugins.jdepend;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
-import hudson.model.Build;
 
 /**
+ * A build action to generate JDepend HTML reports
  * @author cflewis
  *
  */
@@ -35,7 +35,8 @@ public class JDependBuildAction implements Action
     	}
 	}
 	
-	/* (non-Javadoc)
+	/** 
+	 * Return the JDepend display name
 	 * @see hudson.model.Action#getDisplayName()
 	 */
 	public String getDisplayName() {
@@ -43,7 +44,8 @@ public class JDependBuildAction implements Action
 		return "JDepend";
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * Return the JDepend icon path
 	 * @see hudson.model.Action#getIconFileName()
 	 */
 	public String getIconFileName() {
@@ -51,7 +53,8 @@ public class JDependBuildAction implements Action
 		return "graph.gif";
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Returns the path to the JDepend page
 	 * @see hudson.model.Action#getUrlName()
 	 */
 	public String getUrlName() {
@@ -59,6 +62,13 @@ public class JDependBuildAction implements Action
 		return "jdepend";
 	}
 
+	/**
+	 * Get the HTML string of the JDepend report.
+	 * This report is HTML tidied, and had the <html><body> tags
+	 * and such cruft removed.
+	 * 
+	 * @return JDepend HTML report
+	 */
 	public String getJDependHtml() {
 		Pattern trimTop = Pattern.compile("^.*<body>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		Pattern trimBottom = Pattern.compile("</body>.*</html>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);

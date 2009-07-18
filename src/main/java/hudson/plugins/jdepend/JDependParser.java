@@ -21,6 +21,9 @@ import org.xml.sax.SAXException;
 public class JDependParser extends JDependXMLReportParser {
 
 	/**
+	 * An extension from the Codehaus JDependXMLReportParser
+	 * to allow custom methods to be added.
+	 * 
 	 * @param xmlFile
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
@@ -51,6 +54,12 @@ public class JDependParser extends JDependXMLReportParser {
     	return Integer.toString(totalClasses);
     }
 
+	/**
+	 * Returns the cycles from the parser object, required for the
+	 * Codehaus HTML outputter to work.
+	 * 
+	 * @return cycles (not really sure what this even is!)
+	 */
 	public List getCycles() {
 		return cycles;
 	}
