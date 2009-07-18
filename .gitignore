@@ -3,3 +3,7 @@
 .git
 test/*
 work/*
+target/*
+.settings/*
+*~
+.project
