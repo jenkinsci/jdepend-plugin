@@ -33,10 +33,24 @@ public class JDependReporter extends JDependMojo
 		this.xmlParser = xmlParser;
 	}
 	
+	/**
+	 * The old generateReport from the Codehaus JDepend Mojo,
+	 * no longer used.
+	 * 
+	 * @deprecated Use getReport() instead
+	 * @see getReport()
+	 */
 	public void generateReport(Locale locale) throws MavenReportException {
 		throw new MavenReportException("Use getReport() instead!");
 	}
 	
+	/**
+	 * Tidies up the HTML, as the JDepend Sink outputs the HTML
+	 * all on one line, which is yucky.
+	 * 
+	 * @param htmlStream
+	 * @return tidied HTML as a String
+	 */
 	protected String tidyHtmlStream(ByteArrayOutputStream htmlStream) {
         Tidy tidy = new Tidy();
         ByteArrayOutputStream tidyStream = new ByteArrayOutputStream();
@@ -47,10 +61,21 @@ public class JDependReporter extends JDependMojo
         return tidyStream.toString();
 	}
 	
+	/**
+	 * Get the HTML report. This report is already run through HTML Tidy.
+	 * @return HTML report
+	 * @throws MavenReportException when something bad happens
+	 */
 	public String getReport() throws MavenReportException {
 		return getReport(Locale.ENGLISH);
 	}
 	
+	/**
+	 * Get the HTML report. This report is already run through HTML Tidy.
+	 * @param locale
+	 * @return
+	 * @throws MavenReportException
+	 */
 	public String getReport(Locale locale) throws MavenReportException {
 		XhtmlSinkFactory sinkFactory = new XhtmlSinkFactory();
         Sink sink;
@@ -81,9 +106,9 @@ public class JDependReporter extends JDependMojo
          * Running a tidy can create server problems as it can generate
          * tens of thousands of lines. Disabled for now.
          */
-        //return tidyHtmlStream(htmlStream);
+        return tidyHtmlStream(htmlStream);
         
-        return htmlStream.toString();
+        //return htmlStream.toString();
 	}
 	
     protected ResourceBundle getBundle() {
