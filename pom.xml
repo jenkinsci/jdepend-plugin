@@ -77,9 +77,9 @@
   </dependencies>
   
   <scm>
-    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/tags/jdepend-1.0</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/jdepend-1.0</developerConnection>
-    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/jdepend/tags/jdepend-1.0</url>
+    <connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/jdepend/trunk/hudson/plugins/jdepend</url>
   </scm>
   
 </project>
