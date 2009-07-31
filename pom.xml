@@ -79,7 +79,7 @@
   <scm>
     <connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</connection>
     <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</developerConnection>
-    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/jdepend/trunk/hudson/plugins/jdepend</url>
+    <url>https://hudson.dev.java.net/source/browse/hudson/trunk/hudson/plugins/jdepend/</url>
   </scm>
   
 </project>
