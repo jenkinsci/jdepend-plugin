@@ -2,11 +2,6 @@ package hudson.plugins.jdepend;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

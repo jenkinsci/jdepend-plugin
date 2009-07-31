@@ -60,7 +60,7 @@ public class JDependParser extends JDependXMLReportParser {
 	 * 
 	 * @return cycles (not really sure what this even is!)
 	 */
-	public List getCycles() {
+	public List<?> getCycles() {
 		return cycles;
 	}
 }

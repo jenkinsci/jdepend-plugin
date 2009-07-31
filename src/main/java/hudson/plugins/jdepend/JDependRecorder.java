@@ -3,43 +3,25 @@ package hudson.plugins.jdepend;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Extension;
-import hudson.util.FormFieldValidator;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Descriptor;
 import hudson.tasks.BuildStepDescriptor;
-import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.QueryParameter;
 import org.xml.sax.SAXException;
 
-import javax.servlet.ServletException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import jdepend.xmlui.JDepend;
-
-import org.apache.maven.reporting.MavenReportException;
-import org.codehaus.doxia.sink.Sink;
-import org.codehaus.mojo.jdepend.*;
-import org.codehaus.mojo.jdepend.objects.*;
 
 /**
  * Processes JDepend metrics after a build, and outputs them to the

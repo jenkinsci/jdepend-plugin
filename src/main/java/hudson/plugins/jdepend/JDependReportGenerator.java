@@ -356,7 +356,7 @@ public class JDependReportGenerator
                 sink.tableRow();
 
                 /* Abstract Classes */
-                List abstractList = jdpackage.getAbstractClasses();
+                List<?> abstractList = jdpackage.getAbstractClasses();
 
                 sink.tableCell();
 
@@ -377,7 +377,7 @@ public class JDependReportGenerator
                 sink.tableCell_();
 
                 /* Concrete Classes */
-                java.util.List concreteList = jdpackage.getConcreteClasses();
+                List<?> concreteList = jdpackage.getConcreteClasses();
 
                 sink.tableCell();
 
@@ -398,7 +398,7 @@ public class JDependReportGenerator
                 sink.tableCell_();
 
                 /* Used By Packages */
-                List aList = jdpackage.getUsedBy();
+                List<?> aList = jdpackage.getUsedBy();
 
                 sink.tableCell();
 
@@ -471,7 +471,7 @@ public class JDependReportGenerator
     public void doCycles( ResourceBundle bundle, Sink sink )
     {
 
-        List cycleList = jdepend.getCycles();
+        List<?> cycleList = jdepend.getCycles();
 
         if ( cycleList.size() <= 0 )
         {
@@ -503,7 +503,7 @@ public class JDependReportGenerator
 
                 /* Package Dependencies List */
 
-                List packageList = cyclepackage.getPackageList();
+                List<?> packageList = cyclepackage.getPackageList();
                 sink.tableCell();
                 if ( packageList.size() <= 0 )
                 {

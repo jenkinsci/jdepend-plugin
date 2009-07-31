@@ -17,7 +17,6 @@ import hudson.model.Action;
 public class JDependBuildAction implements Action 
 {
 	public final AbstractBuild<?, ?> build;
-	private final JDependParser jDependParser;
 	private String htmlReport;
 	
 	public JDependBuildAction(AbstractBuild<?, ?> build, JDependParser jDependParser)
