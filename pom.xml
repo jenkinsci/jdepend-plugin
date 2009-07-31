@@ -10,7 +10,7 @@
   <groupId>hudson.plugins.jdepend</groupId>
   <artifactId>jdepend</artifactId>
   <packaging>hpi</packaging>
-  <version>1.1.3</version>
+  <version>1.2-SNAPSHOT</version>
   
   <name>JDepend Hudson Plugin</name>
   <description>A Hudson plugin that uses JDepend to generate metrics.</description>
@@ -77,9 +77,9 @@
   </dependencies>
   
   <scm>
-    <connection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/jdepend-1.1.3</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/jdepend-1.1.3</developerConnection>
-    <url>https://hudson.dev.java.net/source/browse/hudson/tags/jdepend-1.1.3</url>
+    <connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/trunk/hudson/plugins/jdepend/</url>
   </scm>
   
 </project>
