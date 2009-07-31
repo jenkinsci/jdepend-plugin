@@ -17,6 +17,7 @@ import hudson.model.Action;
 public class JDependBuildAction implements Action 
 {
 	public final AbstractBuild<?, ?> build;
+	private final JDependParser jDependParser;
 	private String htmlReport;
 	
 	public JDependBuildAction(AbstractBuild<?, ?> build, JDependParser jDependParser)
@@ -79,5 +80,9 @@ public class JDependBuildAction implements Action
 		htmlReport = bottomMatcher.replaceAll("");
 
 		return htmlReport;
+	}
+
+	public JDependParser getJDependParser() {
+		return jDependParser;
 	}
 }
