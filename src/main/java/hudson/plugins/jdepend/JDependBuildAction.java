@@ -40,7 +40,6 @@ public class JDependBuildAction implements Action
 	 * @see hudson.model.Action#getDisplayName()
 	 */
 	public String getDisplayName() {
-		// TODO Auto-generated method stub
 		return "JDepend";
 	}
 
@@ -49,7 +48,6 @@ public class JDependBuildAction implements Action
 	 * @see hudson.model.Action#getIconFileName()
 	 */
 	public String getIconFileName() {
-		// TODO Auto-generated method stub
 		return "graph.gif";
 	}
 
@@ -58,7 +56,6 @@ public class JDependBuildAction implements Action
 	 * @see hudson.model.Action#getUrlName()
 	 */
 	public String getUrlName() {
-		// TODO Auto-generated method stub
 		return "jdepend";
 	}
 

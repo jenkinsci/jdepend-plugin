@@ -30,12 +30,15 @@ import jdepend.xmlui.JDepend;
  * @author Chris Lewis
  */
 
+@SuppressWarnings("unchecked")
 public class JDependRecorder extends Recorder 
 {
     private PrintStream logger = System.out;
+    private String configuredJDependFile = null;
 
     @DataBoundConstructor
-    public JDependRecorder() {
+    public JDependRecorder(String configuredJDependFile) {
+    	this.configuredJDependFile = configuredJDependFile;
     }
 
     /**
@@ -78,10 +81,15 @@ public class JDependRecorder extends Recorder
     	throws IOException, ParserConfigurationException, SAXException {
     	log("Starting JDepend file, outputting to " + jDependOutputFile.getAbsolutePath());
     	JDepend.main(getArgumentList("-file", jDependOutputFile.getAbsolutePath(), sourcePath)); //build.getProject().getWorkspace().getName()));
-    	JDependParser xmlParser = new JDependParser(jDependOutputFile);
+
+    	return getJDependParser(jDependOutputFile); 
+    }
+    
+    protected JDependParser getJDependParser(File jDependExistingFile) 
+    	throws ParserConfigurationException, SAXException, IOException {
+       	JDependParser xmlParser = new JDependParser(jDependExistingFile);
     	log("Found " + xmlParser.getTotalClasses() + " classes in " + xmlParser.getPackages().size() + " packages");
-    	
-    	return xmlParser; 
+    	return xmlParser;
     }
     
     /**
@@ -99,8 +107,26 @@ public class JDependRecorder extends Recorder
     	String sourcePath = ".";
     	FilePath sourceLocation = build.getProject().getWorkspace();
     	boolean copiedWorkspace = false;
+    	JDependParser p = null;
     	
     	log("JDepend plugin is ready");
+    	
+    	/** 
+    	 * If the file is already configured to be generated externally,
+    	 * we can quickly avoid worrying about this at all
+    	 */
+        if (configuredJDependFile != null && 
+        		!configuredJDependFile.matches("(\\s)?")) {
+        	try {
+        		p = getJDependParser(new File(configuredJDependFile));
+        	}
+        	catch (Exception e) {
+        		log("Couldn't generate JDepend file at '" + configuredJDependFile + "'" + e);
+        	}
+        
+        	build.getActions().add(new JDependBuildAction(build, p));
+        	return true;
+        }
 
     	/**
     	 * Ready files by ensuring they're on the local machine, fail out
@@ -130,8 +156,6 @@ public class JDependRecorder extends Recorder
         	log("Unable to get workspace path: " + e);
         	return false;
         }
-        
-    	JDependParser p = null;
         	
         try {
         	p = getJDependParser(jDependFile, sourcePath);
@@ -164,7 +188,7 @@ public class JDependRecorder extends Recorder
         
         if (!jDependFile.delete()) {
         	log("Unable to remove temp JDepend file in " + 
-        			jDependFile.getPath());
+        		jDependFile.getPath());
         }
         
         return true;
@@ -208,6 +232,10 @@ public class JDependRecorder extends Recorder
     public Action getProjectAction(AbstractProject<?, ?> project) {
         return new JDependProjectAction(project);
     }
+    
+	public String getConfiguredJDependFile() {
+		return configuredJDependFile;
+	}
 
     /**
      * Descriptor for {@link JDependRecorder}. Used as a singleton.
@@ -231,7 +259,6 @@ public class JDependRecorder extends Recorder
             super(JDependRecorder.class);
         }
         
-        @SuppressWarnings("unchecked")
         @Override
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
         	return true;

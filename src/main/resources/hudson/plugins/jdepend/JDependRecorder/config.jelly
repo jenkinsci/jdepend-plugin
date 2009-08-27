@@ -4,5 +4,14 @@
 
     See global.jelly for a general discussion about jelly script.
   -->
-
+  <f:entry title="Pre-generated JDepend File">
+    <!--
+      Creates a text field that shows the value of the "name" property.
+      When submitted, it will be passed to the corresponding constructor parameter.
+    -->
+    <f:textbox field="configuredJDependFile" value="${instance.configuredJDependFile}"/>
+    <em>Provide an absolute path to a JDepend file created during the build. 
+    Leave blank to have the plugin generate its own file.</em>
+  </f:entry>
 </j:jelly>
+
