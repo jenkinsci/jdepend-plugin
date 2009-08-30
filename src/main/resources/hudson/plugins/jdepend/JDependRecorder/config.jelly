@@ -10,7 +10,9 @@
       When submitted, it will be passed to the corresponding constructor parameter.
     -->
     <f:textbox field="configuredJDependFile" value="${instance.configuredJDependFile}"/>
-    <em>Provide an absolute path to a JDepend file created during the build. 
+    <em>Provide a path to a JDepend file created during the build.<br />
+    Use a preceding "/" to specify an absolute path, leave off the "/" to
+    specify a path within the workspace.<br />
     Leave blank to have the plugin generate its own file.</em>
   </f:entry>
 </j:jelly>
