@@ -8,6 +8,7 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 import net.sf.json.JSONObject;
@@ -18,6 +19,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -47,6 +49,39 @@ public class JDependRecorder extends Recorder
      */
     protected void log(final String message) {
     	logger.println("[JDepend] " + message);
+    }
+    
+    /**
+     * Parses a JDepend file that has been generated already
+     */
+    public JDependParser getConfiguredParser(AbstractBuild<?, ?> build, 
+    		String configuredPath) {
+    	File xmlFile;
+    	
+    	JDependParser p = null;
+    	
+    	try {
+    		if (configuredPath.startsWith("/")) {
+    			// Path is absolute
+    			xmlFile = new File(configuredPath);
+        		p = getJDependParser(xmlFile);
+    		}
+    		else {
+    			// Path isn't absolute, so relative to workspace
+    			File tempJDependFile = File.createTempFile("jdepend", ".xml");
+    			build.getWorkspace().withSuffix("/" + configuredPath).copyTo(new FileOutputStream(tempJDependFile));
+    			p = getJDependParser(tempJDependFile);
+    	        if (!tempJDependFile.delete()) {
+    	        	log("Unable to remove temp JDepend file in " + 
+    	        		tempJDependFile.getPath());
+    	        }
+    		}
+    	}
+    	catch (Exception e) {
+    		log("Couldn't generate JDepend file at '" + configuredJDependFile + "'" + e);
+    	}
+    	
+    	return p;
     }
     
     /**
@@ -117,12 +152,7 @@ public class JDependRecorder extends Recorder
     	 */
         if (configuredJDependFile != null && 
         		!configuredJDependFile.matches("(\\s)?")) {
-        	try {
-        		p = getJDependParser(new File(configuredJDependFile));
-        	}
-        	catch (Exception e) {
-        		log("Couldn't generate JDepend file at '" + configuredJDependFile + "'" + e);
-        	}
+        	p = getConfiguredParser(build, configuredJDependFile);
         
         	build.getActions().add(new JDependBuildAction(build, p));
         	return true;
@@ -275,5 +305,9 @@ public class JDependRecorder extends Recorder
         	return true;
         }
     }
+
+	public BuildStepMonitor getRequiredMonitorService() {
+		return BuildStepMonitor.BUILD; 
+	}
 }
 
