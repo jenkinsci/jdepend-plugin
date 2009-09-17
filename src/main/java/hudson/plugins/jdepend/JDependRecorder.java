@@ -35,7 +35,7 @@ import jdepend.xmlui.JDepend;
 @SuppressWarnings("unchecked")
 public class JDependRecorder extends Recorder 
 {
-    private PrintStream logger = System.out;
+    private transient PrintStream logger = System.out;
     private String configuredJDependFile = null;
 
     @DataBoundConstructor
