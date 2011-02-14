@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.322</version>
+    <version>1.377</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -11,10 +11,10 @@
   <packaging>hpi</packaging>
   <version>1.2.3-SNAPSHOT</version>
   
-  <name>Hudson JDepend Plugin</name>
-  <description>A Hudson plugin that uses JDepend to generate metrics.</description>
+  <name>Jenkins JDepend Plugin</name>
+  <description>A Jenkins plugin that uses JDepend to generate metrics.</description>
   <inceptionYear>2009</inceptionYear>
-  <url>http://wiki.hudson-ci.org/display/HUDSON/JDepend+Plugin</url>
+  <url>http://wiki.jenkins-ci.org/display/JENKINS/JDepend+Plugin</url>
   
   <licenses>
       <license>
@@ -74,12 +74,6 @@
         <version>1.1.1</version>
       </dependency>
   </dependencies>
-  
-  <scm>
-    <connection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</connection>
-    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/jdepend</developerConnection>
-    <url>https://hudson.dev.java.net/source/browse/hudson/trunk/hudson/plugins/jdepend/</url>
-  </scm>
-  
+
 </project>
   

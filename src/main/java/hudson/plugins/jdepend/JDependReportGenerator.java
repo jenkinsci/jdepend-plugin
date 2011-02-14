@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * A class to generate a report for embedding into Hudson using a parsed
+ * A class to generate a report for embedding into Jenkins using a parsed
  * version of a JDepend report.
  * 
  * @author Chris Lewis
