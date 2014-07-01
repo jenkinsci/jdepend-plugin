@@ -1,8 +1,8 @@
 package hudson.plugins.jdepend;
 
+import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
@@ -11,19 +11,18 @@ import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
+import jdepend.xmlui.JDepend;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import jdepend.xmlui.JDepend;
 
 /**
  * Processes JDepend metrics after a build, and outputs them to the
@@ -203,12 +202,9 @@ public class JDependRecorder extends Recorder
          */
         if (copiedWorkspace) {
         	try {
-        		log("Temporary directory deletion disabled, " +
-        				"due to lack of testing. " +
-        				"Your OS should clean the directory later. " +
-        				"If this is a problem, please submit a bug report.");
-        		//log("Deleting temporary directory " + sourceLocation);
-        		//sourceLocation.deleteRecursive();
+        		log("Deleting temporary directory " + sourceLocation);
+        		sourceLocation.deleteRecursive();
+
         	}
         	catch (Exception e) {
         		log("Unable to remove copied temp source directory at " + 
