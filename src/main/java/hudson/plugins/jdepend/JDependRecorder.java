@@ -90,11 +90,11 @@ public class JDependRecorder extends Recorder
      * 
      * @author Chris Lewis
      */
-    private FilePath copyToLocalWorkspace(FilePath currentWorkspace) throws
+    private FilePath copyToLocalWorkspace(FilePath ws) throws
     	InterruptedException, IOException {
-    	FilePath newSourceLocation = (new FilePath(new File(System.getProperty("java.io.tmpdir"))).createTempDir("hudson-jdepend", ""));
+    	FilePath newSourceLocation = ws.createTempDir("hudson-jdepend", "");
     	log("Copying remote data to " + newSourceLocation.toURI());
-    	currentWorkspace.copyRecursiveTo(newSourceLocation);
+    	ws.copyRecursiveTo(newSourceLocation);
     	log("Copy complete");
 
     	return newSourceLocation;
