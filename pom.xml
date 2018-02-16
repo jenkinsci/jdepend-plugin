@@ -86,6 +86,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
           </exclusion>
+          <exclusion>
+            <!-- Newer Jenkins cores use a patched version -->
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+          </exclusion>
         </exclusions>
       </dependency>
       <dependency> <!-- Upper bounds conflict between Docix Core and JTH -->
