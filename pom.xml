@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.532</version>
+    <version>3.4</version>
   </parent>
   
   <artifactId>jdepend</artifactId>
@@ -13,8 +13,15 @@
   <name>Jenkins JDepend Plugin</name>
   <description>A Jenkins plugin that uses JDepend to generate metrics.</description>
   <inceptionYear>2009</inceptionYear>
-  <url>http://wiki.jenkins-ci.org/display/JENKINS/JDepend+Plugin</url>
-  
+  <url>https://wiki.jenkins.io/display/JENKINS/JDepend+Plugin</url>
+
+  <properties>
+    <jenkins.version>1.625.3</jenkins.version>
+    <java.level>7</java.level>
+    <!-- TODO: Delete once FindBugs issues are fixed (4 issues) -->
+    <findbugs.failOnError>false</findbugs.failOnError>
+  </properties>
+
   <licenses>
       <license>
           <name>BSD</name>
@@ -56,6 +63,13 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>jdepend-maven-plugin</artifactId>
           <version>2.0-beta-2</version>
+          <exclusions>
+            <exclusion>
+              <!-- Newer version comes from Jenkins Core's Acegi Security. No comments... -->
+              <groupId>oro</groupId>
+              <artifactId>oro</artifactId>
+            </exclusion>
+          </exclusions>
       </dependency>
       <dependency>
           <groupId>jdepend</groupId>
@@ -66,6 +80,18 @@
         <groupId>org.apache.maven.doxia</groupId>
         <artifactId>doxia-core</artifactId>
         <version>1.1.1</version>
+        <exclusions>
+          <exclusion>
+            <!-- Newer version comes from Jenkins Core. -->
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency> <!-- Upper bounds conflict between Docix Core and JTH -->
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+        <version>2.11.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.doxia</groupId>
@@ -77,14 +103,14 @@
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
+            <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
             <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
+            <url>https://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
 

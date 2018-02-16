@@ -61,7 +61,7 @@ public class JDependBuildAction implements Action
 
 	/**
 	 * Get the HTML string of the JDepend report.
-	 * This report is HTML tidied, and had the <html><body> tags
+	 * This report is HTML tidied, and had the {@code <html><body>} tags
 	 * and such cruft removed.
 	 * 
 	 * @return JDepend HTML report
