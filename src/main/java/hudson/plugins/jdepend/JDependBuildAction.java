@@ -8,23 +8,35 @@ import java.util.regex.Pattern;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
+import hudson.model.Run;
+import jenkins.model.RunAction2;
+import org.kohsuke.accmod.Restricted;
+import org.kohsuke.accmod.restrictions.NoExternalUse;
+
+import javax.annotation.CheckForNull;
 
 /**
  * A build action to generate JDepend HTML reports
  * @author cflewis
  *
  */
-public class JDependBuildAction implements Action 
+public class JDependBuildAction implements RunAction2
 {
-	public final AbstractBuild<?, ?> build;
-	private final JDependParser jDependParser;
 	private String htmlReport;
-	
-	public JDependBuildAction(AbstractBuild<?, ?> build, JDependParser jDependParser)
+	private transient Run<?,?> owner;
+
+	public JDependBuildAction(JDependParser jDependParser) {
+		this(null, jDependParser);
+	}
+
+	/**
+	 * @deprecated Use {@link #JDependBuildAction(JDependParser)}
+	 */
+	@Deprecated
+	public JDependBuildAction(@CheckForNull AbstractBuild<?, ?> build, JDependParser jDependParser)
 	{
 		super();
-		this.build = build;
-		this.jDependParser = jDependParser;
+		this.owner = build;
     	JDependReporter r = new JDependReporter(jDependParser);
     	
     	try {
@@ -79,7 +91,29 @@ public class JDependBuildAction implements Action
 		return htmlReport;
 	}
 
+	/**
+	 * Gets current parser.
+	 * Not persisted over the restart.
+	 * @return Always {@code null}
+	 */
+	@Deprecated
+	@CheckForNull
 	public JDependParser getJDependParser() {
-		return jDependParser;
+		return null;
+	}
+
+	@Override
+	public void onAttached(Run<?, ?> r) {
+		this.owner = r;
+	}
+
+	@Override
+	public void onLoad(Run<?, ?> r) {
+		this.owner = r;
+	}
+
+	@Restricted(NoExternalUse.class)
+	public Run<?, ?> getOwner() {
+		return owner;
 	}
 }

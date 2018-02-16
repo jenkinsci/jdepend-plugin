@@ -154,7 +154,7 @@ public class JDependRecorder extends Recorder
         		!configuredJDependFile.matches("(\\s)?")) {
         	p = getConfiguredParser(build, configuredJDependFile);
         
-        	build.getActions().add(new JDependBuildAction(build, p));
+        	build.addAction(new JDependBuildAction(p));
         	return true;
         }
 
@@ -194,7 +194,7 @@ public class JDependRecorder extends Recorder
         	log("Couldn't generate JDepend file " + e);
         }
         
-        build.getActions().add(new JDependBuildAction(build, p));
+        build.addAction(new JDependBuildAction(p));
         
         /**
          * Attempt to delete the temp files. If the source JDepend worked on

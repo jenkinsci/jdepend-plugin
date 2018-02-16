@@ -26,7 +26,7 @@
                 }
             </style>
         </l:header>
-        <st:include it="${it.build}" page="sidepanel.jelly" />
+        <st:include it="${it.owner}" page="sidepanel.jelly" />
         
         <l:main-panel>
             <j:out value="${it.getJDependHtml()}"/>
