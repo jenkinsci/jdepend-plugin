@@ -1,3 +1,4 @@
+<?jelly escape-by-default='true'?>
 <div>
   This is a plugin that runs JDepend reports on builds.
 </div>

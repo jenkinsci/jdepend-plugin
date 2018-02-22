@@ -39,7 +39,6 @@ public class JDependParser extends JDependXMLReportParser {
      * 
      * This would work better if it cached the result.
      * 
-     * @param packages
      * @return The total number of classes parsed.
      */
 	protected String getTotalClasses()
