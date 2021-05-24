@@ -1,13 +1,11 @@
 package hudson.plugins.jdepend;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.mojo.jdepend.JDependMojo;
-import org.w3c.tidy.Tidy;
 import org.apache.maven.doxia.module.xhtml.XhtmlSinkFactory;
 import org.apache.maven.doxia.sink.Sink;
 
@@ -44,24 +42,7 @@ public class JDependReporter extends JDependMojo
 	}
 	
 	/**
-	 * Tidies up the HTML, as the JDepend Sink outputs the HTML
-	 * all on one line, which is yucky.
-	 * 
-	 * @param htmlStream
-	 * @return tidied HTML as a String
-	 */
-	protected String tidyHtmlStream(ByteArrayOutputStream htmlStream) {
-        Tidy tidy = new Tidy();
-        ByteArrayOutputStream tidyStream = new ByteArrayOutputStream();
-        tidy.setXHTML(true);
-        tidy.setShowWarnings(false);
-        tidy.parse(new ByteArrayInputStream(htmlStream.toByteArray()), tidyStream);
-        
-        return tidyStream.toString();
-	}
-	
-	/**
-	 * Get the HTML report. This report is already run through HTML Tidy.
+	 * Get the HTML report.
 	 * @return HTML report
 	 * @throws MavenReportException when something bad happens
 	 */
@@ -70,7 +51,7 @@ public class JDependReporter extends JDependMojo
 	}
 	
 	/**
-	 * Get the HTML report. This report is already run through HTML Tidy.
+	 * Get the HTML report.
 	 * @param locale
 	 * @return
 	 * @throws MavenReportException
@@ -101,12 +82,6 @@ public class JDependReporter extends JDependMojo
             throw new MavenReportException("Failed to generate JDepend report:" + e.getMessage(), e);
         }
           
-        /**
-         * Running a tidy can create server problems as it can generate
-         * tens of thousands of lines. Disabled for now.
-         */
-        //return tidyHtmlStream(htmlStream);
-        
         return htmlStream.toString();
 	}
 	
