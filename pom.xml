@@ -96,7 +96,7 @@
       <dependency> <!-- Upper bounds conflict between Docix Core and JTH -->
         <groupId>xerces</groupId>
         <artifactId>xercesImpl</artifactId>
-        <version>2.11.0</version>
+        <version>2.12.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.doxia</groupId>
