@@ -22,7 +22,7 @@
     <changelist>-SNAPSHOT</changelist>
     <jenkins.version>2.319.1</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
-    <doxia.version>1.5</doxia.version>
+    <doxia.version>1.11.1</doxia.version>
     <!-- TODO fix violations -->
     <spotbugs.threshold>High</spotbugs.threshold>
   </properties>
