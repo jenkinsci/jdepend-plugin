@@ -1,6 +1,8 @@
 package hudson.plugins.jdepend;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -82,9 +84,14 @@ public class JDependReporter extends JDependMojo
             throw new MavenReportException("Failed to generate JDepend report:" + e.getMessage(), e);
         }
           
-        return htmlStream.toString();
-	}
-	
+
+        try {
+            return htmlStream.toString(Charset.defaultCharset().name());
+        } catch (UnsupportedEncodingException e) {
+            throw new AssertionError(e);
+        }
+    }
+
     protected ResourceBundle getBundle() {
         return ResourceBundle.getBundle("org.codehaus.mojo.jdepend.jdepend-report");
     }
